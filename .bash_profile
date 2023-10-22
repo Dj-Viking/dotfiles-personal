@@ -6,14 +6,17 @@ test -f ~/.bashrc && . ~/.bashrc
 alias c='code .'
 alias s='git status'
 alias sb='source ~/.bash_profile'
+alias a='git add -A'
 alias led='cd ~/projects/LED-Art-matrix'
 alias proj='cd ~/projects'
 alias bp='vim ~/.bash_profile'
+alias aoc='cd ~/projects/aoc-2022'
+alias vs='cd ~/source/repos'
 
 #setup prompt
 function color_my_prompt {
     # local __user_and_host="\[\033[01;32m\]\u@\h"
-    local __current_location="\[\033[01;34m\]\w"
+    local __current_location="\[\033[01;33m\]\w"
     local __git_branch_color="\[\033[32m\]"
     local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
     local __prompt_tail="\[\033[32m\]\n$"

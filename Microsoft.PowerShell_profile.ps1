@@ -6,12 +6,15 @@ function gitadd { git add -A }
 function gotoled { Set-Location "$($HOME)\projects\LED-Art-matrix" }
 function gotoprojects { Set-Location "$($HOME)\projects" }
 function openvscode { code . }
+function openvs { devenv . }
+function vstudio { Set-Location "$($HOME)\source\repos\" }
 
 Set-Alias s    -Value gitstatus
 Set-Alias a    -Value gitadd
 Set-Alias led  -Value gotoled
 Set-Alias proj -Value gotoprojects
 Set-Alias c    -Value openvscode
+Set-Alias vs   -Value vstudio
 
 function Write-BranchName {
     try {
@@ -39,8 +42,20 @@ function Write-BranchName {
         Write-Host " (no branches yet)" -ForegroundColor Magenta
     }
 }
+
+function Write-MyLocation {
+    param(
+        [System.Management.Automation.PathInfo]$cwd = $(Get-Location),
+        [System.String]$path = $($cwd.Path)
+    )
+
+    if ($path.Contains("Users")) {
+        return "~";
+    }
+}
+
 function prompt {
-    Write-Host "$(Get-Location) " -ForegroundColor Cyan -NoNewline
+    Write-Host "$(Write-MyLocation) " -ForegroundColor Cyan -NoNewline
     Write-BranchName
     Write-Host ("PS > ") -NoNewLine -ForegroundColor Green
     return " "
