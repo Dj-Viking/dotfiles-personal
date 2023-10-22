@@ -47,7 +47,7 @@ function Write-MyLocation {
     [System.Management.Automation.PathInfo]$cwd = Get-Location;
     [System.String]$path = $cwd.Path;
 
-    if ($($path.Split("\", [System.StringSplitOptions]::RemoveEmptyEntries).Length -eq 3)) {
+    if ($($path.Split("\", [System.StringSplitOptions]::RemoveEmptyEntries).Length -eq 3 -and $($path.Contains("Users")))) {
         return "~";
     }
     else {
