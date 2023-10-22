@@ -14,7 +14,7 @@ Set-Alias a    -Value gitadd
 Set-Alias led  -Value gotoled
 Set-Alias proj -Value gotoprojects
 Set-Alias c    -Value openvscode
-Set-Alias vs   -Value vstudio
+Set-Alias vs  -Value vstudio
 
 function Write-BranchName {
     try {
@@ -44,13 +44,15 @@ function Write-BranchName {
 }
 
 function Write-MyLocation {
-    param(
-        [System.Management.Automation.PathInfo]$cwd = $(Get-Location),
-        [System.String]$path = $($cwd.Path)
-    )
+    [System.Management.Automation.PathInfo]$cwd = Get-Location;
+    [System.String]$path = $cwd.Path;
 
-    if ($path.Contains("Users")) {
+    if ($($path.Split("\", [System.StringSplitOptions]::RemoveEmptyEntries).Length -eq 3)) {
         return "~";
+    }
+    else {
+        $newpath = $path.Split("\", [System.StringSplitOptions]::RemoveEmptyEntries)[-1]; # last node of path
+        return $newpath;
     }
 }
 
