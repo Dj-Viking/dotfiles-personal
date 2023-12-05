@@ -9,12 +9,24 @@ function openvscode { code . }
 function openvs { devenv . }
 function vstudio { Set-Location "$($HOME)\source\repos\" }
 
-Set-Alias s    -Value gitstatus
-Set-Alias a    -Value gitadd
-Set-Alias led  -Value gotoled
-Set-Alias proj -Value gotoprojects
-Set-Alias c    -Value openvscode
-Set-Alias vs  -Value vstudio
+function a2022 { Set-Location "$($HOME)\projects\aoc-2022" } 
+function a2015 { Set-Location "$($HOME)\projects\aoc-2015" }
+function a2023 { Set-Location "$($HOME)\projects\aoc-2023" }
+
+function py {
+    & "$($HOME)\AppData\Local\Programs\Python\Python39\python.exe"
+}
+
+Set-Alias s       -Value gitstatus
+Set-Alias a       -Value gitadd
+Set-Alias led     -Value gotoled
+Set-Alias proj    -Value gotoprojects
+Set-Alias c       -Value openvscode
+Set-Alias vs      -Value vstudio
+Set-Alias python  -Value py
+Set-Alias aoc2022 -Value a2022
+Set-Alias aoc2015 -Value a2015
+Set-Alias aoc2023 -Value a2023
 
 function Write-BranchName {
     try {
