@@ -13,6 +13,22 @@ function a2022 { Set-Location "$($HOME)\projects\aoc-2022" }
 function a2015 { Set-Location "$($HOME)\projects\aoc-2015" }
 function a2023 { Set-Location "$($HOME)\projects\aoc-2023" }
 
+function mybash {
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [string]
+        $ScriptFilePath,
+
+        [Parameter(Mandatory, Position = 1)]
+        [string]
+        $ArgumentList
+    )
+
+    Write-Host "[INFO]: running shell script '$ScriptFilePath' with these arguments '$ArgumentList'" -ForegroundColor Green;
+
+    & "C:\Program Files\Git\bin\bash.exe" $ScriptFilePath $ArgumentList;
+}
+
 function py {
     & "$($HOME)\AppData\Local\Programs\Python\Python39\python.exe"
 }
@@ -27,6 +43,7 @@ Set-Alias python  -Value py
 Set-Alias aoc2022 -Value a2022
 Set-Alias aoc2015 -Value a2015
 Set-Alias aoc2023 -Value a2023
+Set-Alias sh      -Value mybash
 
 function Write-BranchName {
     try {
