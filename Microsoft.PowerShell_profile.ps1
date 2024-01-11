@@ -33,6 +33,31 @@ function py {
     & "$($HOME)\AppData\Local\Programs\Python\Python39\python.exe"
 }
 
+function myvcpkg {
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [string]
+        $command,
+
+        [Parameter(Mandatory, Position = 1)]
+        $switches,
+
+        [Parameter(Mandatory, position = 2)]
+        $switch,
+        # arg list can only be one item at the time for a moment
+        [Parameter(Mandatory, Position = 3)]
+        $ArgumentList
+    )
+
+    # for now usage is like this "<package name> <another package>".Split(" ") | ForEach-Object { vcpkg -command install -switches "--triplet" -switch "x64-windows" -ArgumentList "$($_)" }
+    # to install each package individually
+    
+    Write-Host "[INFO]: running vcpkg from profile function" -ForegroundColor Cyan;
+
+    # after vcpkg is installed then move it to "C:\Program Files"
+    & "C:\Program Files\vcpkg\vcpkg.exe" $command $switches $switch $ArgumentList;
+}
+
 Set-Alias s       -Value gitstatus
 Set-Alias a       -Value gitadd
 Set-Alias led     -Value gotoled
@@ -44,6 +69,7 @@ Set-Alias aoc2022 -Value a2022
 Set-Alias aoc2015 -Value a2015
 Set-Alias aoc2023 -Value a2023
 Set-Alias sh      -Value mybash
+Set-Alias vcpkg   -Value myvcpkg
 
 function Write-BranchName {
     try {
