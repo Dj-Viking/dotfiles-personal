@@ -19,14 +19,14 @@ function mybash {
         [string]
         $ScriptFilePath,
 
-        [Parameter(Mandatory, Position = 1)]
+        [Parameter(Position = 1)]
         [string]
-        $ArgumentList
+        $ArgumentList = ""
     )
 
     Write-Host "[INFO]: running shell script '$ScriptFilePath' with these arguments '$ArgumentList'" -ForegroundColor Green;
 
-    & "C:\Program Files\Git\bin\bash.exe" $ScriptFilePath $ArgumentList;
+    & "C:\Program Files\Git\bin\bash.exe" $ScriptFilePath $(if ($ArgumentList -ne "") { "$ArgumentList" });
 }
 
 function py {
