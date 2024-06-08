@@ -13,6 +13,15 @@ function a2022 { Set-Location "$($HOME)\projects\aoc-2022" }
 function a2015 { Set-Location "$($HOME)\projects\aoc-2015" }
 function a2023 { Set-Location "$($HOME)\projects\aoc-2023" }
 
+function touch {   
+    param(
+        [Parameter(Mandatory, Position = 0)]
+        [string]
+        $name
+    )
+    New-Item -Name $name -ItemType File -Path ".\"
+}
+
 function mybash {
     param(
         [Parameter(Mandatory, Position = 0)]
