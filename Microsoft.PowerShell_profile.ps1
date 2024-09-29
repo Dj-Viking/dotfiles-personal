@@ -40,6 +40,10 @@ function openvideo {
         }
     }
 
+    if ($null -eq $filetoopen) {
+        throw "that name didn't match anything in the list provided";
+    }
+
     & "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe" $filetoopen;
 }
 function a2022 { Set-Location "$($HOME)\projects\aoc-2022" } 
