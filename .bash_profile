@@ -10,8 +10,11 @@ alias a='git add -A'
 alias led='cd ~/projects/LED-Art-matrix'
 alias proj='cd ~/projects'
 alias bp='vim ~/.bash_profile'
-alias aoc='cd ~/projects/aoc-2022'
+alias a2022='cd ~/projects/aoc-2022'
+alias a2015='cd ~/projects/aoc-2015'
 alias vs='cd ~/source/repos'
+alias desc='cd ~/projects/description'
+alias eddesc='vim ~/projects/description/description.md'
 
 #setup prompt
 function color_my_prompt {
