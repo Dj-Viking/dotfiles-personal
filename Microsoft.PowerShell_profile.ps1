@@ -8,18 +8,59 @@ function gotoprojects { Set-Location "$($HOME)\projects" }
 function openvscode { code . }
 function openvs { devenv . }
 function vstudio { Set-Location "$($HOME)\source\repos\" }
-
-function a2022 { Set-Location "$($HOME)\projects\aoc-2022" } 
-function a2015 { Set-Location "$($HOME)\projects\aoc-2015" }
-function a2023 { Set-Location "$($HOME)\projects\aoc-2023" }
-
-function touch {   
+function touch {
+    
     param(
         [Parameter(Mandatory, Position = 0)]
         [string]
         $name
     )
     New-Item -Name $name -ItemType File -Path ".\"
+}
+
+function videos { Set-Location "$($HOME)\Videos" }
+function openvideo {
+
+    $videos = Get-ChildItem $home\videos;
+
+    Write-Host -ForegroundColor Green "[INFO]: Current Videos"
+    $videos | ForEach-Object {
+        Write-Host -ForegroundColor Green "[INFO]: $($_.Name)";
+    }
+
+
+    Write-Host "";
+    $filename = Read-Host "enter a partial filename that would match one of the choices";
+    $filetoopen = $null;
+
+    :vids for ($i = 0; $i -lt $videos.Length; $i++) {
+        if ($videos[$i].Name -cmatch $filename) {
+            $filetoopen = $videos[$i].FullName;
+            break vids;
+        }
+    }
+
+    & "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe" $filetoopen;
+}
+function a2022 { Set-Location "$($HOME)\projects\aoc-2022" } 
+function a2015 { Set-Location "$($HOME)\projects\aoc-2015" }
+function a2023 { Set-Location "$($HOME)\projects\aoc-2023" }
+
+function Get-FileRecurse {
+    [OutputType([System.Void])]
+    param(
+        [string]
+        $path,
+
+        [string]
+        $filename
+    )
+
+    Get-ChildItem -Path $path -Recurse | Where-Object {
+        $_.FullName -match $filename
+    } | ForEach-Object {
+        Write-Host $_.FullName -ForegroundColor Green;
+    }
 }
 
 function mybash {
@@ -35,35 +76,33 @@ function mybash {
 
     Write-Host "[INFO]: running shell script '$ScriptFilePath' with these arguments '$ArgumentList'" -ForegroundColor Green;
 
-    & "C:\Program Files\Git\bin\bash.exe" $ScriptFilePath $(if ($ArgumentList -ne "") { "$ArgumentList" });
+    & "C:\Program Files\Git\bin\bash.exe" $ScriptFilePath $(if ($ArgumentList -ne "") { $ArgumentList });
 }
 
 function py {
     & "$($HOME)\AppData\Local\Programs\Python\Python39\python.exe"
 }
 
+# Boost_INCLUDE_DIR = C:/Program Files/vcpkg/installed/x64-windows/include" -DCMAKE_MAKE_PROGRAM:FILEPATH=C:/Program
 function myvcpkg {
     param(
         [Parameter(Mandatory, Position = 0)]
         [string]
         $command,
 
-        [Parameter(Mandatory, Position = 1)]
-        $switches,
+        [Parameter(Position = 1)]
+        $switches = $(if ("install" -ne $command) {"--triplet"} else {""}),
 
-        [Parameter(Mandatory, position = 2)]
-        $switch,
-        # arg list can only be one item at the time for a moment
+        [Parameter(position = 2)]
+
+        $switch = $(if ("install" -ne $command) {"x64-windows"} else {""}),
         [Parameter(Mandatory, Position = 3)]
         $ArgumentList
     )
-
     # for now usage is like this "<package name> <another package>".Split(" ") | ForEach-Object { vcpkg -command install -switches "--triplet" -switch "x64-windows" -ArgumentList "$($_)" }
     # to install each package individually
-    
     Write-Host "[INFO]: running vcpkg from profile function" -ForegroundColor Cyan;
 
-    # after vcpkg is installed then move it to "C:\Program Files"
     & "C:\Program Files\vcpkg\vcpkg.exe" $command $switches $switch $ArgumentList;
 }
 
@@ -79,6 +118,7 @@ Set-Alias aoc2015 -Value a2015
 Set-Alias aoc2023 -Value a2023
 Set-Alias sh      -Value mybash
 Set-Alias vcpkg   -Value myvcpkg
+Set-Alias find    -Value Get-FileRecurse
 
 function Write-BranchName {
     try {
@@ -126,3 +166,5 @@ function prompt {
     Write-Host ("PS > ") -NoNewLine -ForegroundColor Green
     return " "
 }
+
+Write-Host "[INFO]: `$PROFILE loaded" -ForegroundColor Cyan;
