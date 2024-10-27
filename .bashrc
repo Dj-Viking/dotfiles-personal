@@ -1,4 +1,5 @@
 #! /bin/bash
+test -d nvim-files || sh init.sh
 
 # update this according to what's used in linux
 # since this was only for windows and cygwin as the terminal shell thing...
