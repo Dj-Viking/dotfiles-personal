@@ -1,5 +1,6 @@
 echo "( ._.)"
 
+
 function color_my_prompt {
     # local __user_and_host="\[\033[01;32m\]\u@\h"
     local __current_location="\[\033[01;33m\]\w"
@@ -89,7 +90,7 @@ alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master
 alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapcode"
 
 
-
+# ssh configs
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
@@ -97,6 +98,5 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
-# ssh configs
 eval `ssh-agent` > /dev/null
 ssh-add ~/.ssh/github > /dev/null
