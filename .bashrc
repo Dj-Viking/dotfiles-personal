@@ -1,6 +1,18 @@
 echo "( ._.)"
-export PS1="\e[34;1m\w \e[38;5;214m| |
->> \e[0m"
+
+function color_my_prompt {
+    # local __user_and_host="\[\033[01;32m\]\u@\h"
+    local __current_location="\[\033[01;33m\]\w"
+    local __git_branch_color="\[\033[32m\]"
+    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+    local __prompt_tail="\[\033[32m\]\n$"
+    local __reset_color="\[\033[00m\]"
+    export PS1="$__current_location $__git_branch_color$__git_branch$__prompt_tail$__reset_color "
+}
+color_my_prompt
+
+# export PS1="\e[34;1m\w \e[38;5;214m| |
+# >> \e[0m"
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
