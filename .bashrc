@@ -1,5 +1,8 @@
 echo "( ._.)"
 
+function startaudio {
+   pulseaudio --start
+}
 
 function color_my_prompt {
     # local __user_and_host="\[\033[01;32m\]\u@\h"
@@ -88,6 +91,7 @@ alias cardb="RUSTFLAGS='-Zmacro-backtrace -Awarnings -g' cargo +nightly with gdb
 alias carx="RUSTFLAGS='-Awarnings' cargo +nightly expand"
 alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master"
 alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapcode"
+
 
 
 # ssh configs
