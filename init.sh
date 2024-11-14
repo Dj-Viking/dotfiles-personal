@@ -5,8 +5,8 @@ if ! [ -d ./.config/nvim ]; then
 fi
 
 if [ -d ./.config/nvim ]; then
-    pushd ./.config/nvim;
+    pushd ./.config/nvim > /dev/null;
     git fetch;
     git pull origin master --ff;
-    popd;
+    popd > /dev/null;
 fi
