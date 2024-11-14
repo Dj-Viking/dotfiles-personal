@@ -3,3 +3,10 @@
 if ! [ -d ./.config/nvim ]; then
    git clone https://github.com/Dj-Viking/nvim-files.git ./.config/nvim
 fi
+
+if [ -d ./.config/nvim ]; then
+    pushd ./.config/nvim;
+    git fetch;
+    git pull origin master --ff;
+    popd;
+fi

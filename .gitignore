@@ -2,4 +2,10 @@ dconf
 systemd
 google-chrome
 pulse
+
+.config/obs-studio/logs
+.config/obs-studio/profiler_data
+.config/obs-studio/basic
+.config/obs-studio/plugin_config
+
 .config/nvim
