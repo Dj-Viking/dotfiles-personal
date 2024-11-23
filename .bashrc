@@ -1,20 +1,16 @@
-echo "( ._.)"
-
-function startaudio {
-   pulseaudio --start
-}
+echo -e "\033[01;34m ( ._.)"
 
 function color_my_prompt {
     # local __user_and_host="\[\033[01;32m\]\u@\h"
     local __current_location="\[\033[01;33m\]\w"
-    local __git_branch_color="\[\033[32m\]"
-    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+    local __git_branch_color="\[\033[34m\]"
+    local mybranch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
     local __prompt_tail="\[\033[32m\]\n$"
     local __reset_color="\[\033[00m\]"
-    export PS1="$__current_location $__git_branch_color$__git_branch$__prompt_tail$__reset_color "
+    export thing="$__current_location $__git_branch_color$mybranch$__prompt_tail$__reset_color "
 }
 color_my_prompt
-
+PS1="$thing"
 # export PS1="\e[34;1m\w \e[38;5;214m| |
 # >> \e[0m"
 
@@ -23,8 +19,6 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_DIR=$HOME/.local/state
 export XDG_RUNTIME_DIR=$HOME/.local/run
-
-export OPT_CHROME="/opt/google/chrome"
 
 export PATH=$PATH:$HOME/scripts/ 
 export PATH=$PATH:$XDG_DATA_HOME/cargo/bin/
@@ -70,7 +64,6 @@ alias poop='echo "LDKFJDKJFDKJFPPPOOPPOTOPOTOHTOHTPTPTOHPOHOPTHPH"'
 alias wipe="doas pacman -Rscnd"
 alias cleanup="doas pacman -Rns (pacman -Qdtq)"
 
-alias chrome=google-chrome-stable
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 alias ls='ls -A --color=auto'
 alias paru='paru --removemake=yes --bottomup --cleanafter'
@@ -79,6 +72,7 @@ alias nl="nl -w1 -s' | ' -b a"
 alias rsync="rsync -v --progress"
 alias proj='cd ~/projects/'
 
+alias rg='cargo run'
 alias carr="RUSTFLAGS='-Zmacro-backtrace' cargo +nightly run --quiet"
 alias carq="RUSTFLAGS='-Awarnings' cargo +nightly --quiet"
 alias barq="RUST_BACKTRACE=1 RUSTFLAGS=-Awarnings cargo +nightly --quiet"
@@ -92,15 +86,3 @@ alias carx="RUSTFLAGS='-Awarnings' cargo +nightly expand"
 alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master"
 alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapcode"
 
-
-
-# ssh configs
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-fi
-
-eval `ssh-agent` > /dev/null
-ssh-add ~/.ssh/github > /dev/null
