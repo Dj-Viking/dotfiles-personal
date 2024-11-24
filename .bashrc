@@ -9,6 +9,11 @@ function color_my_prompt {
     local __reset_color="\[\033[00m\]"
     export thing="$__current_location $__git_branch_color$mybranch$__prompt_tail$__reset_color "
 }
+
+function mabranch {
+    echo $(git branch 2> /dev/null | grep -e ^* | sed -E s/^\\\*\ \(.+\)$/\\\1\ /)
+}
+
 color_my_prompt
 PS1="$thing"
 # export PS1="\e[34;1m\w \e[38;5;214m| |
@@ -71,6 +76,7 @@ alias xclip="xclip -selection clipboard"
 alias nl="nl -w1 -s' | ' -b a"
 alias rsync="rsync -v --progress"
 alias proj='cd ~/projects/'
+alias gpo='git push origin'
 
 alias rg='cargo run'
 alias carr="RUSTFLAGS='-Zmacro-backtrace' cargo +nightly run --quiet"
@@ -82,7 +88,7 @@ alias bacc="bacon clippy"
 alias bect="bacon test --nocapture"
 alias cart="cargo +nightly test --quiet --nocapture"
 alias cardb="RUSTFLAGS='-Zmacro-backtrace -Awarnings -g' cargo +nightly with gdb --"
-alias carx="RUSTFLAGS='-Awarnings' cargo +nightly expand"
+alias carx="RUSTFLAGS=-Awarnings cargo +nightly expand"
 alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master"
 alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapcode"
 
