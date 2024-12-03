@@ -60,6 +60,7 @@ alias v="$VISUAL"
 alias e="$EDITOR"
 alias bp='nvim ~/.bashrc'
 alias sb='source ~/.bashrc'
+alias charge='cat /sys/class/power_supply/BAT0/charge_now'
 
 alias ..='cd ..'
 alias ...='cd ../..'
