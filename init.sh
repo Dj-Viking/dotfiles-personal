@@ -7,7 +7,7 @@ fi
 if [ -d ./.config/nvim ]; then
     pushd ./.config/nvim > /dev/null;
     git fetch;
-	git checkout djviking-branch;
+    git checkout djviking-branch;
     git pull origin djviking-branch --ff;
     popd > /dev/null;
 fi
