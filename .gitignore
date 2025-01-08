@@ -1,7 +1,13 @@
 dconf
 systemd
+gh
+user-dirs.locale
+user-dirs.dirs
 google-chrome
+chromium
+unity3d
 pulse
+neofetch
 
 .config/obs-studio/logs
 .config/obs-studio/profiler_data

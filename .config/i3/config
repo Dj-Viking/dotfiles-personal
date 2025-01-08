@@ -6,6 +6,21 @@ floating_modifier $mod
 
 font pango:monospace 10
 
+exec --no-startup-id optimus-manager-setup \
+	--post-start
+
+exec --no-startup-id xrandr \
+	--output DP-4.1 --mode 1440x900 --pos 0x0 --rotate left \
+	--output DP-4.2 --mode 1440x900 --pos 3360x0 --rotate normal \
+	--output DP-0 --off \
+	--output DP-1 --off \
+	--output DP-2 --off \
+	--output DP-3 --off \
+	--output HDMI-0 --off \
+	--output DP-4 --off \
+	--output DP-5 --off \
+	--output eDP-1-1 --primary --mode 1920x1080 --pos 1440x0 --rotate normal
+
 # wallpaper
 # exec --no-startup-id /home/slab/scripts/getwall.sh
 # bindsym $mod+Shift+w exec --no-startup-id /home/slab/scripts/getwall.sh
@@ -15,12 +30,15 @@ exec --no-startup-id xset s off
 exec --no-startup-id xset s -dpms
 
 # startup
-# exec --no-startup-id picom -b
+exec --no-startup-id pulseaudio --start
+exec --no-startup-id picom -b
+exec --no-startup-id pipewire
 
-# exec --no-startup-id $HOME/scripts/sinit.sh
-# exec --no-startup-id /usr/bin/unclutter --jitter 100 --timeout 1 --start-hidden --ignore-scrolling
+exec --no-startup-id /usr/bin/unclutter --jitter 100 --timeout 1 --start-hidden --ignore-scrolling
 # exec --no-startup-id /usr/bin/warpd
 # exec --no-startup-id /usr/bin/mpd
+
+exec --no-startup-id feh --no-fehbg --bg-fill /home/djviking/Downloads/wallpaper2.webp 
 
 # start stuff
 bindsym $mod+Return exec /usr/bin/alacritty
@@ -122,5 +140,3 @@ bar {
       binding_mode       #d9840e #d9840e #ffffff
    }
 }
-
-
