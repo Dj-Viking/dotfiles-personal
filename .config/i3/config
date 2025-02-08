@@ -115,7 +115,7 @@ bindsym $mod+Ctrl+k resize shrink height 10px
 bindsym $mod+Ctrl+l resize grow width 10px
 
 # Class                 Border  Bground Text    Indicator Child_border
-client.focused          #ca7616 #794a44 #d4b66f #7a430d   #746350
+client.focused          #00ff00 #794a44 #d4b66f #7a430d   #00afaa
 client.focused_inactive #444444 #24201d #d4b66f #484e50   #444444
 client.unfocused        #38322f #24201d #c3ac90 #292d2e   #38322f
 client.urgent           #2f343a #d9840e #ffffff #900000   #2f343a
@@ -133,9 +133,9 @@ bar {
       separator  #5f5352
 
       # Class            Border  Bground Text
-      focused_workspace  #794a44 #794a44 #d4b66f
-      active_workspace   #24201d #24201d #d4b66f
-      inactive_workspace #24201d #24201d #c3ac90
+      focused_workspace  #00ff00 #00a100 #000000
+      active_workspace   #00ff00 #24201d #d4b66f
+      inactive_workspace #00ff00 #24201d #c3ac90
       urgent_workspace   #d9840e #d9840e #ffffff
       binding_mode       #d9840e #d9840e #ffffff
    }
