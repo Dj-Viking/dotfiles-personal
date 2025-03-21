@@ -44,7 +44,7 @@ alias p="$PAGER"
 alias v="$VISUAL"
 alias e="$EDITOR"
 alias bp='nvim ~/.bashrc'
-alias bf='nvim ~/.bash_functions'
+alias bf='nvim ~/.bash_functions.sh'
 alias sb='source ~/.bashrc'
 alias charge='cat /sys/class/power_supply/BAT0/charge_now'
 
