@@ -9,10 +9,7 @@ font pango:monospace 10
 exec --no-startup-id optimus-manager-setup \
 	--post-start
 
-# this is starting up wireplumber because it doesn't start right away for whatever reason
-# pipewire starts automatically
-# if i want to switch between pulseaudio and pipewire then i can use the functions I defined in .bash_functions.sh
-exec wireplumber
+exec_once pipewire && pipewire-pulse && wireplumber
 
 exec --no-startup-id xrandr \
 	--output DP-0 --off \
