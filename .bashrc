@@ -86,3 +86,8 @@ alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapco
 # call functions
 color_my_prompt;
 
+if ! [ "$PW_STARTED" = "1" ]; then 
+	kill_pipewire;
+	sleep 1;
+	start_pipewire;
+fi

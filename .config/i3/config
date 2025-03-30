@@ -9,8 +9,16 @@ font pango:monospace 10
 exec --no-startup-id optimus-manager-setup \
 	--post-start
 
-exec_once pipewire && pipewire-pulse && wireplumber
+# this used to work but now it doesn't
+# for some really strange reason
+# exec_once pipewire && pipewire-pulse && wireplumber
 
+# uncomment if using only one monitor
+# otherwise the gpu will get mad
+# that the other monitors aren't connected
+# and it will freeze the computer and 
+# the only way out is to just force shutdown by
+# pressing the power button of the computer
 exec --no-startup-id xrandr \
 	--output DP-0 --off \
 	--output DP-1 --off \
@@ -19,9 +27,21 @@ exec --no-startup-id xrandr \
 	--output HDMI-0 --off \
 	--output DP-4 --off \
 	--output DP-5 --off \
-	--output DP-4.1 --mode 1440x900 --pos 0x0 --rotate left \
-	--output DP-4.2 --mode 1440x900 --pos 3360x0 --rotate normal \
 	--output eDP-1-1 --primary --mode 1920x1080 --pos 1440x0 --rotate normal
+
+# display config for all monitors
+#
+# exec --no-startup-id xrandr \
+# 	--output DP-0 --off \
+# 	--output DP-1 --off \
+# 	--output DP-2 --off \
+# 	--output DP-3 --off \
+# 	--output HDMI-0 --off \
+# 	--output DP-4 --off \
+# 	--output DP-5 --off \
+# 	--output DP-4.1 --mode 1440x900 --pos 0x0 --rotate left \
+# 	--output DP-4.2 --mode 1440x900 --pos 3360x0 --rotate normal \
+# 	--output eDP-1-1 --primary --mode 1920x1080 --pos 1440x0 --rotate normal
 
 # wallpaper
 # exec --no-startup-id /home/slab/scripts/getwall.sh
