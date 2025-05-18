@@ -13,38 +13,27 @@ exec --no-startup-id optimus-manager-setup \
 # for some really strange reason
 # exec_once pipewire && pipewire-pulse && wireplumber
 
-# uncomment if using only one monitor
+# be careful which xrandr configuration is on because 
 # otherwise the gpu will get mad
-# that the other monitors aren't connected
+# if the other monitors aren't connected
 # and it will freeze the computer and 
 # the only way out is to just force shutdown by
 # pressing the power button of the computer
-exec --no-startup-id xrandr \
-	--output DP-0 --off \
-	--output DP-1 --off \
-	--output DP-2 --off \
-	--output DP-3 --off \
-	--output HDMI-0 --off \
-	--output DP-4 --off \
-	--output DP-5 --off \
-	--output eDP-1-1 --primary --mode 1920x1080 --pos 1440x0 --rotate normal
 
-# display config for all monitors
-#
-# exec --no-startup-id xrandr \
-# 	--output DP-0 --off \
-# 	--output DP-1 --off \
-# 	--output DP-2 --off \
-# 	--output DP-3 --off \
-# 	--output HDMI-0 --off \
-# 	--output DP-4 --off \
-# 	--output DP-5 --off \
-# 	--output DP-4.1 --mode 1440x900 --pos 0x0 --rotate left \
-# 	--output DP-4.2 --mode 1440x900 --pos 3360x0 --rotate normal \
-# 	--output eDP-1-1 --primary --mode 1920x1080 --pos 1440x0 --rotate normal
+### Single monitor display config ###
+# maybe need to do some arandr shit with one screen and that will help it from crashing
+# single screen
+exec --no-startup-id xrandr \
+	--output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
+
+### Dual monitor display config ###
+# exactly the same as two monitor setup???? xrandr is fucking weird....
+# streaming with projector and/or multi-monitor setup
+# exec --no-startup-id xrandr --output DP-4.1 --mode 1920x1080 --pos 0x0 --rotate left --output DP-4.2 --mode 1280x720 --pos 3000x0 --rotate normal --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off  --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
 
 # wallpaper
 # exec --no-startup-id /home/slab/scripts/getwall.sh
+
 # bindsym $mod+Shift+w exec --no-startup-id /home/slab/scripts/getwall.sh
 
 # disable screen blanking
@@ -52,21 +41,21 @@ exec --no-startup-id xset s off
 exec --no-startup-id xset s -dpms
 
 # startup
-exec --no-startup-id pulseaudio --start
-exec --no-startup-id picom -b
-exec --no-startup-id pipewire
+# exec --no-startup-id pulseaudio --start
+# exec --no-startup-id picom -b
+# exec --no-startup-id pipewire
 
 exec --no-startup-id /usr/bin/unclutter --jitter 100 --timeout 1 --start-hidden --ignore-scrolling
 # exec --no-startup-id /usr/bin/warpd
 # exec --no-startup-id /usr/bin/mpd
 
-exec --no-startup-id feh --no-fehbg --bg-fill /home/djviking/Downloads/wallpaper2.webp 
+# wallpaper 
+exec --no-startup-id feh --no-fehbg --bg-fill /home/djviking/Downloads/noreactonlyrust.png
 
 # start stuff
 bindsym $mod+Return exec /usr/bin/alacritty
 bindsym $mod+s exec /usr/bin/flameshot gui
 bindsym $mod+d exec --no-startup-id dmenu_run -nf "#d4b66f" -nb "#24201d" -sb "#794a44" -sf "#d4b66f" -p "dmenu"
-
 
 bindsym $mod+q kill
 
