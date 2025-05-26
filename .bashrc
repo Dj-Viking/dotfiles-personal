@@ -10,6 +10,27 @@ export XDG_STATE_DIR=$HOME/.local/state
 export XDG_RUNTIME_DIR=$HOME/.local/run
 
 export PATH=$PATH:$HOME/scripts/ 
+
+# set the godot env stuff
+source ~/.config/godotenv/env
+# . "$HOME/.config/godotenv/env" # Added by GodotEnv
+# GODOT=~/.config/godotenv/godot/bin/godot
+alias godot="(setsid $GODOT &)"
+
+#gamejam stuffs
+source ~/.glcrds
+
+# dotnet paths
+export DOTNET_ROOT=$HOME/.dotnet/
+export PATH=$PATH:$HOME/.dotnet/
+
+# aseprite
+export PATH=$PATH:$HOME/.local/share/Steam/steamapps/common/Aseprite/
+
+# dotnet tools paths
+# (includes powershell)
+export PATH=$PATH:$HOME/.local/share/dotnet/.dotnet/tools
+
 export PATH=$PATH:$XDG_DATA_HOME/cargo/bin/
 export PATH=$PATH:$HOME/bin/
 export PATH=$PATH:$OPT_CHROME/
@@ -25,7 +46,7 @@ export GOPATH=$XDG_DATA_HOME/go
 export LEIN_HOME=$XDG_DATA_HOME/lein
 export NUGET_PACKAGES=$XDG_DATA_HOME/nuget
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export WINEPEFIX=$XDG_DATA_HOME/wine
+export WINEPREFIX=$XDG_DATA_HOME/wine
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -36,6 +57,9 @@ export EDITOR='nvim'
 export BROWSER='/usr/bin/chromium'
 
 # aliases
+alias c='vscodium .'
+alias gamejam='cd ~/projects/chromajam-2025/src/ChromaJam2025/'
+alias powershell='pwsh'
 alias start-docker-service='systemctl start docker.service'
 alias full='brightnessctl set 24000'
 alias half='brightnessctl set 12000'
@@ -98,13 +122,15 @@ function hd-mount-help () {
 	echo "FYI the music drive has the rx2 recordings on sda5 when it's plugged into this PC";
 	echo "if you want to mount some HD and read from it";
 	echo "inspect devices with 'lsblk'";
-	echo "use 'mount /dev/<your device> hd-mount-target'";
+	echo "use 'sudo mount /dev/<your device> hd-mount-target'";
+	echo "and unmount with 'sudo umount /dev/<your device>'"
 }
 
 function move-rx2-recording-to-new-liveset-date-folder () {
 	# mount HD  
 	# look for last created REC00x.WAV file in hd-mount-target/PIONEER\ REC
-	# mkdir for new liveset folder with today's date
+	# mkdir for new liveset folder with today's date in streamvods dir
+		
 	# copy the file to the new dir in streamvods
 	# unmount the drive
 	#
