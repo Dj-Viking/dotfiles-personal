@@ -1,3 +1,4 @@
+
 function color_my_prompt() {
     # local __user_and_host="\[\033[01;32m\]\u@\h"
     local __current_location="\[\033[01;33m\]\w"
@@ -72,4 +73,55 @@ function restart_pipewire () {
 	kill_pipewire;
 	sleep 1;
 	start_pipewire;
+}
+
+function hd-mount () {
+    sudo mount /dev/sda5 $HOME/hd-mount-target;
+}
+
+# this is only setup for pulling pioneer mixer recordings
+function hd-mount-cp-pioneerrec () {
+
+	if [ "" = "$1" ]; then
+		echo "no file provided - usage: hd-mount-cp REC00X.WAV"
+		return 1;
+	fi
+
+	if [ "" = "$2" ]; then
+		echo "no path to save provided - usage: hd-mount-cp REC00X.WAV <path to save>"
+		return 1;
+	fi
+
+	# just file name REC00X.WAV
+	local FILE="$1";
+	# /home/djviking/..
+	local PATH_TO_SAVE="$2"
+
+	# TODO: do in bash -
+	# this was just a quick hack with 
+	# nodejs to make the timestamp of the recording as the filename
+	local TIMESTAMP=$(node -e "console.log(require('fs').statSync('/home/djviking/hd-mount-target/PIONEER REC/$FILE').atime.toString().replaceAll(' ', '-'))")
+	echo "timestamp of file... 
+		$TIMESTAMP
+	"
+
+	echo "copying to save path..."
+	cp $HOME/hd-mount-target/PIONEER\ REC/$FILE $PATH_TO_SAVE
+
+	echo "renaming the wav file..."
+	mv "$PATH_TO_SAVE/$FILE" "$PATH_TO_SAVE/$TIMESTAMP.wav"
+}
+
+function move-rx2-recording-to-new-liveset-date-folder () {
+	# mount HD  
+	# look for last created REC00x.WAV file in hd-mount-target/PIONEER\ REC
+	# mkdir for new liveset folder with today's date in streamvods dir
+		
+	# copy the file to the new dir in streamvods
+	# unmount the drive
+	#
+	# (param)? for playing the track immediately
+
+	echo "TODO";
+	exit 1;
 }

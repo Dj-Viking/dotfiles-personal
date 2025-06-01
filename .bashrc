@@ -64,6 +64,7 @@ alias start-docker-service='systemctl start docker.service'
 alias full='brightnessctl set 24000'
 alias half='brightnessctl set 12000'
 alias dim='brightnessctl set 5000'
+alias dimmer='brightnessctl set 1000'
 alias a='git add -A'
 alias s='git status'
 alias ll='ls -l'
@@ -126,19 +127,6 @@ function hd-mount-help () {
 	echo "and unmount with 'sudo umount /dev/<your device>'"
 }
 
-function move-rx2-recording-to-new-liveset-date-folder () {
-	# mount HD  
-	# look for last created REC00x.WAV file in hd-mount-target/PIONEER\ REC
-	# mkdir for new liveset folder with today's date in streamvods dir
-		
-	# copy the file to the new dir in streamvods
-	# unmount the drive
-	#
-	# (param)? for playing the track immediately
-
-	echo "TODO";
-	exit 1;
-}
 
 # call functions
 color_my_prompt;
