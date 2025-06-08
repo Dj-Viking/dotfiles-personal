@@ -75,6 +75,15 @@ function restart_pipewire () {
 	start_pipewire;
 }
 
+function hd-mount-help () {
+	echo "FYI the music drive has the rx2 recordings on sda5 when it's plugged into this PC";
+	echo "if you want to mount some HD and read from it";
+	echo "inspect devices with 'lsblk'";
+	echo "use 'sudo mount /dev/<your device> hd-mount-target'";
+	echo "and unmount with 'sudo umount /dev/<your device>'"
+}
+
+
 function hd-mount () {
     sudo mount /dev/sda5 $HOME/hd-mount-target;
 }
@@ -98,9 +107,11 @@ function hd-mount-cp-pioneerrec () {
 	local PATH_TO_SAVE="$2"
 
 	# TODO: do in bash -
+	# i think I wont be able to get the time the file was created easily because
+	# what i think would be the 'birth' time of the file it gives some nonsensical date
 	# this was just a quick hack with 
 	# nodejs to make the timestamp of the recording as the filename
-	local TIMESTAMP=$(node -e "console.log(require('fs').statSync('/home/djviking/hd-mount-target/PIONEER REC/$FILE').atime.toString().replaceAll(' ', '-'))")
+	local TIMESTAMP=$(node -e "console.log(require('fs').statSync('/home/djviking/hd-mount-target/PIONEER REC/$FILE').atime.toString().replaceAll(' ', '-').replaceAll(':', '-'))")
 	echo "timestamp of file... 
 		$TIMESTAMP
 	"

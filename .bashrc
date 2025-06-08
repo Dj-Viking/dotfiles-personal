@@ -11,6 +11,10 @@ export XDG_RUNTIME_DIR=$HOME/.local/run
 
 export PATH=$PATH:$HOME/scripts/ 
 
+#ableton through wine
+# wherever steam installed ableton when the msi was run inside steam with proton experimental
+alias ableton="(setsid wine /home/djviking/.steam/steam/steamapps/compatdata/4243261831/pfx/drive_c/ProgramData/Ableton/Live\ 10\ Suite/Program/Ableton\ Live\ 10\ Suite.exe &)"
+
 # set the godot env stuff
 source ~/.config/godotenv/env
 # . "$HOME/.config/godotenv/env" # Added by GodotEnv
@@ -46,7 +50,11 @@ export GOPATH=$XDG_DATA_HOME/go
 export LEIN_HOME=$XDG_DATA_HOME/lein
 export NUGET_PACKAGES=$XDG_DATA_HOME/nuget
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export WINEPREFIX=$XDG_DATA_HOME/wine
+
+# wineprefix
+export WINEARCH=win64
+# export WINEPREFIX=$XDG_DATA_HOME/wine
+export WINEPREFIX=~/.wine64.ableton
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -118,14 +126,6 @@ alias carx="RUSTFLAGS=-Awarnings cargo +nightly expand"
 alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master"
 alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapcode"
 alias rmidi='cd ~/projects/rust-midi;';
-
-function hd-mount-help () {
-	echo "FYI the music drive has the rx2 recordings on sda5 when it's plugged into this PC";
-	echo "if you want to mount some HD and read from it";
-	echo "inspect devices with 'lsblk'";
-	echo "use 'sudo mount /dev/<your device> hd-mount-target'";
-	echo "and unmount with 'sudo umount /dev/<your device>'"
-}
 
 
 # call functions
