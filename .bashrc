@@ -52,6 +52,7 @@ export NUGET_PACKAGES=$XDG_DATA_HOME/nuget
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 
 # wineprefix
+export WINEDLLOVERRIDES="d2d1=d"
 export WINEARCH=win64
 # export WINEPREFIX=$XDG_DATA_HOME/wine
 export WINEPREFIX=~/.wine64.ableton
@@ -65,6 +66,7 @@ export EDITOR='nvim'
 export BROWSER='/usr/bin/chromium'
 
 # aliases
+alias jka='(setsid ./.steam/steam/steamapps/common/Jedi\ Academy/GameData_OpenJK/jamp &)'
 alias c='vscodium .'
 alias gamejam='cd ~/projects/chromajam-2025/src/ChromaJam2025/'
 alias powershell='pwsh'
@@ -81,8 +83,8 @@ alias i="nsxiv"
 alias p="$PAGER"
 alias v="$VISUAL"
 alias e="$EDITOR"
-alias bp='vim ~/.bashrc'
-alias bf='vim ~/.bash_functions.sh'
+alias bp='v ~/.bashrc'
+alias bf='v ~/.bash_functions.sh'
 alias sb='source ~/.bashrc'
 alias charge='cat /sys/class/power_supply/BAT0/charge_now'
 alias ?='echo $?'
