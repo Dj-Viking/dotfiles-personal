@@ -91,12 +91,12 @@ function hd-mount () {
 # this is only setup for pulling pioneer mixer recordings
 function hd-mount-cp-pioneerrec () {
 
-	if [ "" = "$1" ]; then
+	if [ -z "$1" ]; then
 		echo "no file provided - usage: hd-mount-cp REC00X.WAV"
 		return 1;
 	fi
 
-	if [ "" = "$2" ]; then
+	if [ -z "$2" ]; then
 		echo "no path to save provided - usage: hd-mount-cp REC00X.WAV <path to save>"
 		return 1;
 	fi
