@@ -1,3 +1,5 @@
+# TODO: script for moving splice downloads tools
+# ableton splice location
 echo -e "\033[01;34m ( ._.)"
 
 source ~/.bash_functions.sh
@@ -11,6 +13,13 @@ export XDG_RUNTIME_DIR=$HOME/.local/run
 
 export PATH=$PATH:$HOME/scripts/ 
 
+# local bin
+export PATH=$PATH:/home/djviking/.local/bin
+
+# required to run a cobol exe to find the libcob.so.4 in the library search path(s)
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
+
 #ableton through wine
 # wherever steam installed ableton when the msi was run inside steam with proton experimental
 alias ableton="(setsid wine /home/djviking/.steam/steam/steamapps/compatdata/4243261831/pfx/drive_c/ProgramData/Ableton/Live\ 10\ Suite/Program/Ableton\ Live\ 10\ Suite.exe &)"
@@ -23,7 +32,6 @@ alias godot="(setsid $GODOT &)"
 
 #gamejam stuffs
 source ~/.glcrds
-
 # dotnet paths
 export DOTNET_ROOT=$HOME/.dotnet/
 export PATH=$PATH:$HOME/.dotnet/
@@ -53,7 +61,8 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 
 # wineprefix
 export WINEDLLOVERRIDES="d2d1=d"
-export WINEARCH=win64
+export WINEARCH=win64 # use 64bit (experimental)
+# export WINEARCH=win32 # use 32bit
 # export WINEPREFIX=$XDG_DATA_HOME/wine
 export WINEPREFIX=~/.wine64.ableton
 
@@ -66,11 +75,19 @@ export EDITOR='nvim'
 export BROWSER='/usr/bin/chromium'
 
 # aliases
+alias shotcut='(setsid /usr/bin/shotcut &)'
+alias gti=git
+alias cupsweb='chromium 127.0.0.1:631'
+alias extract_lzip_help='echo "lzip -cd *.tar.lz | tar -xf -"'
+alias portf='cd ~/projects/portfolio'
 alias jka='(setsid ./.steam/steam/steamapps/common/Jedi\ Academy/GameData_OpenJK/jamp &)'
-alias c='vscodium .'
+alias c='code .'
+alias vc='vscodium .'
+alias koil='cd ~/projects/raycasting/'
 alias gamejam='cd ~/projects/chromajam-2025/src/ChromaJam2025/'
 alias powershell='pwsh'
 alias start-docker-service='systemctl start docker.service'
+alias start-cups-service='systemctl start cups.service'
 alias full='brightnessctl set 24000'
 alias half='brightnessctl set 12000'
 alias dim='brightnessctl set 5000'
@@ -89,15 +106,18 @@ alias sb='source ~/.bashrc'
 alias charge='cat /sys/class/power_supply/BAT0/charge_now'
 alias ?='echo $?'
 
+# nav
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ~='cd ~'
 alias jgd='cd /home/djviking/.steam/steam/steamapps/common/Jedi\ Academy/GameData'
 
+# lol
 alias poop='echo "LDKFJDKJFDKJFPPPOOPPOTOPOTOHTOHTPTPTOHPOHOPTHPH"'
 alias wipe="sudo pacman -Rscnd"
 alias cleanup="sudo pacman -Rns; pacman -Qdtq"
 
+# program shortcuts
 alias dcord='setsid /home/djviking/Downloads/Discord/Discord &'
 alias kill_dcord='pkill Discord'
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
@@ -106,13 +126,20 @@ alias paru='paru --removemake=yes --bottomup --cleanafter'
 alias xclip="xclip -selection clipboard"
 alias nl="nl -w1 -s' | ' -b a"
 alias rsync="rsync -v --progress"
+alias gpo='git push origin'
+
+# navigating
 alias proj='cd ~/projects/'
 alias led='cd ~/projects/led-art-matrix'
 alias rva='cd ~/projects/rust-visual-art'
-alias gpo='git push origin'
+alias rmidi='cd ~/projects/rust-midi;';
+alias resp='cd ~/projects/rust-esp-neopixel'
 
+
+# rust
 alias gargo='cargo'
 alias car='cargo run'
+alias dbcar='RUST_BACKTRACE=full cargo run'
 alias carrelease='cargo run --release'
 alias cg='cargo clippy -- -Fclippy::all'
 alias carr="RUSTFLAGS='-Zmacro-backtrace' cargo +nightly run --quiet"
@@ -127,16 +154,14 @@ alias cardb="RUSTFLAGS='-Zmacro-backtrace -Awarnings -g' cargo +nightly with gdb
 alias carx="RUSTFLAGS=-Awarnings cargo +nightly expand"
 alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master"
 alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapcode"
-alias rmidi='cd ~/projects/rust-midi;';
-
 
 # call functions
+# prompt
 color_my_prompt;
 
-
+# audio
 if ! [ "$PW_STARTED" = "1" ]; then 
 	kill_pipewire;
 	sleep 1;
 	start_pipewire;
 fi
-

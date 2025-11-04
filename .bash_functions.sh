@@ -27,6 +27,7 @@ function kill_pipewire () {
 
 	#switch on pulseaudio
 	# pulseaudio --check;
+	# dont do anymore because we don't use pulse directly
 	# if [ "$?" = "1" ]; then pulseaudio --start; fi
 
 	echo "killed pipewire";
@@ -92,12 +93,14 @@ function hd-mount () {
 function hd-mount-cp-pioneerrec () {
 
 	if [ -z "$1" ]; then
-		echo "no file provided - usage: hd-mount-cp REC00X.WAV"
+		echo "no file provided - 
+		usage: hd-mount-cp-pioneerrec REC00X.WAV"
 		return 1;
 	fi
 
 	if [ -z "$2" ]; then
-		echo "no path to save provided - usage: hd-mount-cp REC00X.WAV <path to save>"
+		echo "no path to save provided - 
+		usage: hd-mount-cp-pioneerrec REC00X.WAV <path to save>"
 		return 1;
 	fi
 
@@ -106,11 +109,6 @@ function hd-mount-cp-pioneerrec () {
 	# /home/djviking/..
 	local PATH_TO_SAVE="$2"
 
-	# TODO: do in bash -
-	# i think I wont be able to get the time the file was created easily because
-	# what i think would be the 'birth' time of the file it gives some nonsensical date
-	# this was just a quick hack with 
-	# nodejs to make the timestamp of the recording as the filename
 	local TIMESTAMP=$(node -e "console.log(require('fs').statSync('/home/djviking/hd-mount-target/PIONEER REC/$FILE').atime.toString().replaceAll(' ', '-').replaceAll(':', '-'))")
 	echo "timestamp of file... 
 		$TIMESTAMP
@@ -124,6 +122,7 @@ function hd-mount-cp-pioneerrec () {
 }
 
 function move-rx2-recording-to-new-liveset-date-folder () {
+
 	# mount HD  
 	# look for last created REC00x.WAV file in hd-mount-target/PIONEER\ REC
 	# mkdir for new liveset folder with today's date in streamvods dir
