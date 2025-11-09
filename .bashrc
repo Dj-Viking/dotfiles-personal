@@ -11,9 +11,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_DIR=$HOME/.local/state
 export XDG_RUNTIME_DIR=$HOME/.local/run
 
-export PATH=$PATH:$HOME/scripts/ 
-
-# local bin
+# paths
 export PATH=$PATH:/home/djviking/.local/bin
 
 # required to run a cobol exe to find the libcob.so.4 in the library search path(s)
@@ -26,15 +24,17 @@ alias ableton="(setsid wine /home/djviking/.steam/steam/steamapps/compatdata/424
 
 # set the godot env stuff
 source ~/.config/godotenv/env
+
 # . "$HOME/.config/godotenv/env" # Added by GodotEnv
 # GODOT=~/.config/godotenv/godot/bin/godot
 alias godot="(setsid $GODOT &)"
 
 #gamejam stuffs
 source ~/.glcrds
+
 # dotnet paths
 export DOTNET_ROOT=$HOME/.dotnet/
-export PATH=$PATH:$HOME/.dotnet/
+export PATH=$PATH:$DOTNET_ROOT
 
 # aseprite
 export PATH=$PATH:$HOME/.local/share/Steam/steamapps/common/Aseprite/
@@ -106,12 +106,6 @@ alias sb='source ~/.bashrc'
 alias charge='cat /sys/class/power_supply/BAT0/charge_now'
 alias ?='echo $?'
 
-# nav
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ~='cd ~'
-alias jgd='cd /home/djviking/.steam/steam/steamapps/common/Jedi\ Academy/GameData'
-
 # lol
 alias poop='echo "LDKFJDKJFDKJFPPPOOPPOTOPOTOHTOHTPTPTOHPOHOPTHPH"'
 alias wipe="sudo pacman -Rscnd"
@@ -129,6 +123,10 @@ alias rsync="rsync -v --progress"
 alias gpo='git push origin'
 
 # navigating
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ~='cd ~'
+alias jgd='cd /home/djviking/.steam/steam/steamapps/common/Jedi\ Academy/GameData'
 alias proj='cd ~/projects/'
 alias led='cd ~/projects/led-art-matrix'
 alias rva='cd ~/projects/rust-visual-art'
