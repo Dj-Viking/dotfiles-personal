@@ -22,15 +22,20 @@ exec --no-startup-id optimus-manager-setup \
 
 ### Single monitor display config ###
 # maybe need to do some arandr shit with one screen and that will help it from crashing
-# single screen
-exec --no-startup-id xrandr \
-	--output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
 
-### Dual monitor display config ###
-# exactly the same as two monitor setup???? xrandr is fucking weird....
-# streaming with projector and/or multi-monitor setup
-# exec --no-startup-id xrandr --output DP-4.1 --mode 1920x1080 --pos 0x0 --rotate left --output DP-4.2 --mode 1280x720 --pos 3000x0 --rotate normal --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off  --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
+# single screen ###
+# exec --no-startup-id xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal
 
+# a test with single screen arandr generated config
+# exec --no-startup-id xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal
+
+# two screens using side hdmi output ###
+# exec --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --primary --mode 1921x1080 --pos 1080x0 --rotate normal
+
+# multi screen ###
+exec --no-startup-id xrandr --output DP-4.1 --mode 1920x1080 --pos 0x0 --rotate left --output DP-4.2 --mode 1920x1080 --pos 3000x0 --rotate normal --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
+
+# exec --no-startup-id xrandr --output DP-4.1 --off --output DP-4.2 --off -output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --auto --output DP-4 --off  --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
 # wallpaper
 # exec --no-startup-id /home/slab/scripts/getwall.sh
 
@@ -86,20 +91,20 @@ bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1; workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2; workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3; workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4; workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5; workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
+bindsym $mod+Shift+1 move container to workspace number 1;  workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2;  workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3;  workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4;  workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5;  workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6;  workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7;  workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8;  workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9;  workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
 
 bindsym $mod+f fullscreen toggle
 
-bindsym $mod+space floating toggle
+bindsym $mod+space floating    toggle
 bindsym $mod+Shift+space focus mode_toggle
 
 default_border pixel
@@ -116,14 +121,14 @@ bindsym $mod+minus scratchpad show
 
 # Audio:
 bindsym $mod+$alt+p exec mpc toggle
-bindsym $mod+$alt+plus exec mpc volume +5
+bindsym $mod+$alt+plus exec mpc volume  +5
 bindsym $mod+$alt+minus exec mpc volume -5
 
 # Resizing containers:
-bindsym $mod+Ctrl+h resize shrink width 10px
-bindsym $mod+Ctrl+j resize grow height 10px
+bindsym $mod+Ctrl+h resize shrink width  10px
+bindsym $mod+Ctrl+j resize grow height   10px
 bindsym $mod+Ctrl+k resize shrink height 10px
-bindsym $mod+Ctrl+l resize grow width 10px
+bindsym $mod+Ctrl+l resize grow width    10px
 
 # Class                 Border  Bground Text    Indicator Child_border
 client.focused          #00ff00 #794a44 #d4b66f #7a430d   #00afaa
