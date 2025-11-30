@@ -10,7 +10,7 @@ function color_my_prompt() {
     PS1="$__current_location $__git_branch_color$mybranch$__prompt_tail$__reset_color "
 }
 
-function mabranch() {
+function getgit-branch() {
     echo $(git branch 2> /dev/null | grep -e ^* | sed -E s/^\\\*\ \(.+\)$/\\\1\ /)
 }
 
@@ -86,7 +86,18 @@ function hd-mount-help () {
 
 
 function hd-mount () {
-    sudo mount /dev/sda5 $HOME/hd-mount-target;
+	type=$1
+	if [ -z $type ]; then
+		echo "error: provide type i.e. hd-mount 1";
+		return 1;
+	fi 
+
+	# for now just the ssd
+	if ! [ "$type" = "1" ]; then
+		echo "error: type must be a number i.e. hd-mount 1";
+		return 1;
+	fi 
+    sudo mount "/dev/sda$type" "$HOME/hd-mount-target";
 }
 
 # this is only setup for pulling pioneer mixer recordings
@@ -123,15 +134,30 @@ function hd-mount-cp-pioneerrec () {
 
 function move-rx2-recording-to-new-liveset-date-folder () {
 
-	# mount HD  
-	# look for last created REC00x.WAV file in hd-mount-target/PIONEER\ REC
-	# mkdir for new liveset folder with today's date in streamvods dir
-		
-	# copy the file to the new dir in streamvods
-	# unmount the drive
-	#
-	# (param)? for playing the track immediately
+	if ! [ -d "/home/djviking/hd-mount-target/PIONEER REC" ]; then
+		echo "error: ssd not connected";
+		return 1;
+	fi
 
-	echo "TODO";
-	exit 1;
+	if [ -z "$1" ]; then
+		echo "no file provided - 
+		usage: hd-mount-cp-pioneerrec REC00X.WAV"
+		return 1;
+	fi
+
+	local FILE="$1";
+
+	#new Date(require('fs').statSync("/home/djviking/hd-mount-target/PIONEER REC/"+require('fs').readdirSync("/home/djviking/hd-mount-target/PIONEER REC")[3]).atimeMs).toISOString().slice(0, 10)
+	local TIMESTAMP=$(node -e "console.log(new Date(require('fs').statSync('/home/djviking/hd-mount-target/PIONEER REC/'+'$FILE').atimeMs).toISOString().slice(0, 10))")
+	echo "timestamp of file... 
+		$TIMESTAMP
+	"
+
+	local PATH_TO_SAVE="/home/djviking/streamvods/livesets/liveset-$TIMESTAMP"
+	mkdir "$PATH_TO_SAVE"
+		
+	hd-mount-cp-pioneerrec $FILE $PATH_TO_SAVE
+
+	return 0;
+
 }
