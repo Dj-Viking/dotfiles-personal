@@ -126,9 +126,12 @@ function hd-mount-cp-pioneerrec () {
 	"
 
 	echo "copying to save path..."
+	echo "'cp $HOME/hd-mount-target/PIONEER\ REC/$FILE $PATH_TO_SAVE'"
+
 	cp $HOME/hd-mount-target/PIONEER\ REC/$FILE $PATH_TO_SAVE
 
 	echo "renaming the wav file..."
+	echo "'mv \"$PATH_TO_SAVE/$FILE\" \"$PATH_TO_SAVE/$TIMESTAMP.wav\"'"
 	mv "$PATH_TO_SAVE/$FILE" "$PATH_TO_SAVE/$TIMESTAMP.wav"
 }
 
@@ -154,6 +157,7 @@ function move-rx2-recording-to-new-liveset-date-folder () {
 	"
 
 	local PATH_TO_SAVE="/home/djviking/streamvods/livesets/liveset-$TIMESTAMP"
+	echo "path to save: $PATH_TO_SAVE"
 	mkdir "$PATH_TO_SAVE"
 		
 	hd-mount-cp-pioneerrec $FILE $PATH_TO_SAVE
