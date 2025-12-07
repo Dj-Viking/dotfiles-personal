@@ -75,6 +75,7 @@ export EDITOR='nvim'
 export BROWSER='/usr/bin/chromium'
 
 # aliases
+alias ch='(setsid chromium &)'
 alias shotcut='(setsid /usr/bin/shotcut &)'
 alias gti=git
 alias cupsweb='chromium 127.0.0.1:631'
