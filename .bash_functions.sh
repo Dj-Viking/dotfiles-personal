@@ -41,6 +41,13 @@ function start_pipewire () {
 	#switch off pulse audio if it's running check the exit code of --check
 	# pulseaudio --check;
 	# if [ "$?" = "0" ]; then pkill pulseaudio; fi
+	#
+
+	stat /run/user/1000/pulse/native;
+	if [ "$?" = "0" ]; then
+		echo "removing /run/user/1000/pulse/native file to restart pipewire stuff"
+		rm /run/user/1000/pulse/native
+	fi
 
 	# run pipewire and wireplumber
 	$(echo pgrep -a pipewire)
@@ -164,4 +171,25 @@ function move-rx2-recording-to-new-liveset-date-folder () {
 
 	return 0;
 
+}
+
+function kill_screenshare () {
+	# switch off pipewire and wireplumber
+
+	# pkill xdg-desktop-portal; 
+	#
+	# pkill xdg-desktop-portal-wlr; 
+
+
+	echo "killed screenshare";
+	echo "-----------------------------------------------------";
+}
+
+function start_screenshare () {
+
+	(setsid /lib/xdg-desktop-portal -r &); 
+
+	(setsid /lib/xdg-desktop-portal-wlr &); 
+
+	export SCREENSHARE_STARTED=1
 }

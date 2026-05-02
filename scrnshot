@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# move to /usr/local/bin to make it work with i3 config file
+S_DIR="/home/djviking/screenshots"
+f=$(mktemp -p "$S_DIR" "$(date '+%F_%H-%m-XXX.png')")
+echo "$f"
+
+wayshot -s="$(slurp -w 0 -d)" --stdout | tee "$f" | wl-copy

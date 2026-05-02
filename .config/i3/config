@@ -6,8 +6,7 @@ floating_modifier $mod
 
 font pango:monospace 10
 
-exec --no-startup-id optimus-manager-setup \
-	--post-start
+# exec --no-startup-id optimus-manager-setup --post-start
 
 # this used to work but now it doesn't
 # for some really strange reason
@@ -24,16 +23,15 @@ exec --no-startup-id optimus-manager-setup \
 # maybe need to do some arandr shit with one screen and that will help it from crashing
 
 # single screen ###
-# exec --no-startup-id xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal
+exec --no-startup-id xrandr --output eDP-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off 
 
-# a test with single screen arandr generated config
-# exec --no-startup-id xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal
+# multi screen ###
+# exec --no-startup-id xrandr --output DP-4.1 --mode 1920x1080 --pos 0x0 --rotate left --output DP-4.2 --mode 1920x1080 --pos 3000x0 --rotate normal --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
 
+# this doesn't work :( I think TV manufacturers mess with the protocol which makes it not work on linux
 # two screens using side hdmi output ###
 # exec --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --primary --mode 1921x1080 --pos 1080x0 --rotate normal
 
-# multi screen ###
-exec --no-startup-id xrandr --output DP-4.1 --mode 1920x1080 --pos 0x0 --rotate left --output DP-4.2 --mode 1920x1080 --pos 3000x0 --rotate normal --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --off --output DP-4 --off --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
 
 # exec --no-startup-id xrandr --output DP-4.1 --off --output DP-4.2 --off -output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --auto --output DP-4 --off  --output DP-5 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal
 # wallpaper
@@ -59,7 +57,7 @@ exec --no-startup-id feh --no-fehbg --bg-fill /home/djviking/Downloads/noreacton
 
 # start stuff
 bindsym $mod+Return exec /usr/bin/alacritty
-bindsym $mod+s exec /usr/bin/flameshot gui
+bindsym $mod+s exec scrnshot  
 bindsym $mod+d exec --no-startup-id dmenu_run -nf "#d4b66f" -nb "#24201d" -sb "#794a44" -sf "#d4b66f" -p "dmenu"
 
 bindsym $mod+q kill
@@ -112,7 +110,7 @@ gaps inner 10
 
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
+# exit i3 (logs you out of your sway session)
 bindsym $mod+Shift+e exec i3-msg exit
 
 # Scratchpad:

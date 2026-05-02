@@ -9,10 +9,16 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_DIR=$HOME/.local/state
-export XDG_RUNTIME_DIR=$HOME/.local/run
+# export XDG_RUNTIME_DIR=$HOME/.local/run
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export XDG_CURRENT_DESKTOP=sway
 
 # paths
 export PATH=$PATH:/home/djviking/.local/bin
+
+#xdg-desktop-portal
+export PATH=$PATH:/usr/lib
+
 
 # required to run a cobol exe to find the libcob.so.4 in the library search path(s)
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
@@ -75,6 +81,7 @@ export EDITOR='nvim'
 export BROWSER='/usr/bin/chromium'
 
 # aliases
+alias shot='wayshot -s="$(slurp -w 0 -d)" --stdout | wl-copy'
 alias ch='(setsid chromium &)'
 alias shotcut='(setsid /usr/bin/shotcut &)'
 alias gti=git
@@ -139,17 +146,6 @@ alias resp='cd ~/projects/rust-esp-neopixel'
 alias gargo='cargo'
 alias car='cargo run'
 alias dbcar='RUST_BACKTRACE=full cargo run'
-alias carrelease='cargo run --release'
-alias cg='cargo clippy -- -Fclippy::all'
-alias carr="RUSTFLAGS='-Zmacro-backtrace' cargo +nightly run --quiet"
-alias carq="RUSTFLAGS='-Awarnings' cargo +nightly --quiet"
-alias barq="RUST_BACKTRACE=1 RUSTFLAGS=-Awarnings cargo +nightly --quiet"
-alias carf="cargo +nightly fmt --all"
-alias care="cargo +nightly eval"
-alias bacc="bacon clippy"
-alias bect="bacon test --nocapture"
-alias cart="cargo +nightly test --quiet --nocapture"
-alias cardb="RUSTFLAGS='-Zmacro-backtrace -Awarnings -g' cargo +nightly with gdb --"
 alias carx="RUSTFLAGS=-Awarnings cargo +nightly expand"
 alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master"
 alias cslap="cargo generate -g https://github.com/slbsh/cargo-generate -b slapcode"
@@ -164,3 +160,10 @@ if ! [ "$PW_STARTED" = "1" ]; then
 	sleep 1;
 	start_pipewire;
 fi
+
+# screenshare TODO: check if this works
+# if ! [ "$SCREENSHARE_STARTED" = "1" ]; then 
+# 	kill_screenshare;
+# 	sleep 1;
+# 	start_screenshare;
+# fi
