@@ -1,5 +1,3 @@
-# TODO: script for moving splice downloads tools
-# ableton splice location
 echo -e "\033[01;34m ( ._.)"
 
 source ~/.bash_functions.sh
@@ -24,9 +22,13 @@ export PATH=$PATH:/usr/lib
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH="/usr/lib:$LD_LIBRARY_PATH"
 
+
 #ableton through wine
 # wherever steam installed ableton when the msi was run inside steam with proton experimental
 alias ableton="(setsid wine /home/djviking/.steam/steam/steamapps/compatdata/4243261831/pfx/drive_c/ProgramData/Ableton/Live\ 10\ Suite/Program/Ableton\ Live\ 10\ Suite.exe &)"
+
+# TODO: script for moving splice downloads tools
+# ableton splice location
 
 # set the godot env stuff
 source ~/.config/godotenv/env
@@ -52,6 +54,10 @@ export PATH=$PATH:$HOME/.local/share/dotnet/.dotnet/tools
 export PATH=$PATH:$XDG_DATA_HOME/cargo/bin/
 export PATH=$PATH:$HOME/bin/
 export PATH=$PATH:$OPT_CHROME/
+
+# setup my bash env for esp stuff
+export LIBCLANG_PATH="/home/djviking/.local/share/rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-20.1.1_20250829/esp-clang/lib"
+export PATH="/home/djviking/.local/share/rustup/toolchains/esp/xtensa-esp-elf/esp-15.2.0_20250920/xtensa-esp-elf/bin:$PATH"
 
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export CUDA_CACHE_PATH=$XDG_CACHE_HOME/nv
@@ -128,7 +134,10 @@ alias paru='paru --removemake=yes --bottomup --cleanafter'
 alias xclip="xclip -selection clipboard"
 alias nl="nl -w1 -s' | ' -b a"
 alias rsync="rsync -v --progress"
-alias gpo='git push origin'
+alias gp="git push origin $(getgit-branch)"
+function gcm () {
+	git commit -m "$1"
+}
 
 # navigating
 alias ..='cd ..'
@@ -145,6 +154,7 @@ alias resp='cd ~/projects/rust-esp-neopixel'
 # rust
 alias gargo='cargo'
 alias car='cargo run'
+alias carrelease='cargo run --release'
 alias dbcar='RUST_BACKTRACE=full cargo run'
 alias carx="RUSTFLAGS=-Awarnings cargo +nightly expand"
 alias cinit="cargo generate -g https://github.com/slbsh/cargo-generate -b master"
